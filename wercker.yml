@@ -2,8 +2,13 @@ box: maven:3.5.4-jdk-9
 build:
   steps:
     - script:
-        name: build
-        code: mvn clean package
+      name: build
+      code: mvn clean package
     - internal/docker-build:
       dockerfile: target/Dockerfile
       image-name: helidon-se-demo
+    - internal/docker-push:
+      image-name: helidon-se-demo
+      username: $DOCKER_USER
+      password: $DOCKER_PASSWORD
+      repository: phx.ocir.io/oraclepaasmicroservices/helidon-se-demo
