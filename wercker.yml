@@ -4,3 +4,6 @@ build:
     - script:
         name: build
         code: mvn clean package
+    - internal/docker-build:
+      dockerfile: target/Dockerfile
+      image-name: helidon-se-demo
