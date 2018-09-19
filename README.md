@@ -51,7 +51,7 @@ curl -X GET http://localhost:8080/greet/Jose
 ## Build the Docker Image
 
 ```
-docker build -t quickstart-se target
+docker build -t quickstart-se -f target/Dockerfile .
 ```
 
 ## Start the application with Docker
