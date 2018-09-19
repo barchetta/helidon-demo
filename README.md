@@ -1,2 +1,2 @@
-# helidon-demo
-Simple Demo application written using Helidon
+# helidon-demo-sd
+Simple Demo application written using Helidon SE
