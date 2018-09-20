@@ -5,7 +5,7 @@ build:
       name: build
       code: |
         export MAVEN_OPTS="-Dmaven.repo.local=${WERCKER_CACHE_DIR}/local_repository"
-        rm -rf ~/.ssh ${WERCKER_CACHE_DIR}/local_repository/io/helidon/examples/quickstart-se
+        rm -rf ~/.ssh ${WERCKER_CACHE_DIR}/local_repository/io/helidon/examples/helidon-se-demo
         mvn clean package
     - internal/docker-build:
       dockerfile: target/Dockerfile
@@ -15,3 +15,21 @@ build:
       username: $DOCKER_USER
       password: $DOCKER_PASSWORD
       repository: phx.ocir.io/oraclepaasmicroservices/helidon-se-demo
+    - kubectl:
+        name: Remove secret for image pull if it already exists
+        server: $KUBE_SERVER
+        token: $KUBE_TOKEN
+        insecure-skip-tls-verify: true
+        command: delete secret myregistrykey
+    - kubectl:
+        name: Create secret for image pull
+        server: $KUBE_SERVER
+        token: $KUBE_TOKEN
+        insecure-skip-tls-verify: true
+        command: create secret docker-registry myregistrykey --docker-server=phx.ocir.io --docker-username=$DOCKER_USER --docker-password="$DOCKER_PASSWORD" --docker-email=info@helidon.io
+    - kubectl:
+        name: Deploy application
+        server: $KUBE_SERVER
+        token: $KUBE_TOKEN
+        insecure-skip-tls-verify: true
+        command: apply -f target/app.yaml

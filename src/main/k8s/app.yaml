@@ -43,8 +43,10 @@ spec:
     spec:
       containers:
       - name: ${project.artifactId}
-        image: ${project.artifactId}
+        image: phx.ocir.io/oraclepaasmicroservices/${project.artifactId}:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
+      imagePullSecrets:
+      - name: helidon-ocir
 ---
