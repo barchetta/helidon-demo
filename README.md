@@ -1,5 +1,5 @@
 
-# Helidon Example: quickstart-se
+# Helidon Example: helidon-se-demo
 
 This example implements a simple Hello World REST service.
 
@@ -29,7 +29,7 @@ mvn package
 ## Start the application
 
 ```
-java -jar target/quickstart-se.jar
+java -jar target/helidon-se-demo.jar
 ```
 
 ## Exercise the application
@@ -51,13 +51,13 @@ curl -X GET http://localhost:8080/greet/Jose
 ## Build the Docker Image
 
 ```
-docker build -t quickstart-se -f target/Dockerfile .
+docker build -t helidon-se-demo -f target/Dockerfile .
 ```
 
 ## Start the application with Docker
 
 ```
-docker run --rm -p 8080:8080 quickstart-se:latest
+docker run --rm -p 8080:8080 helidon-se-demo:latest
 ```
 
 Exercise the application as described above
@@ -67,6 +67,6 @@ Exercise the application as described above
 ```
 kubectl cluster-info                # Verify which cluster
 kubectl get pods                    # Verify connectivity to cluster
-kubectl create -f target/app.yaml   # Deply application
-kubectl get service quickstart-se  # Get service info
+kubectl create -f target/app.yaml   # Deploy application
+kubectl get service helidon-se-demo  # Get service info
 ```
