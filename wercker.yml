@@ -20,13 +20,13 @@ build:
         server: $KUBE_SERVER
         token: $KUBE_TOKEN
         insecure-skip-tls-verify: true
-        command: delete secret myregistrykey
+        command: delete secret helidon-ocir
     - kubectl:
         name: Create secret for image pull
         server: $KUBE_SERVER
         token: $KUBE_TOKEN
         insecure-skip-tls-verify: true
-        command: create secret docker-registry myregistrykey --docker-server=phx.ocir.io --docker-username=$DOCKER_USER --docker-password="$DOCKER_PASSWORD" --docker-email=info@helidon.io
+        command: create secret docker-registry helidon-ocir --docker-server=phx.ocir.io --docker-username=$DOCKER_USER --docker-password="$DOCKER_PASSWORD" --docker-email=info@helidon.io
     - kubectl:
         name: Deploy application
         server: $KUBE_SERVER
